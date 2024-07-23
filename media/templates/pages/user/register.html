@@ -1,0 +1,78 @@
+
+{% load static %}
+{% block header %}
+    {% include 'pages/partials/meta_tags.html' %}
+    {% include 'pages/partials/scripts.html' %}
+    <!-- SITE TITLE -->
+    <title>Products Template</title>
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}"/>  
+    <!-- Google Font -->
+
+        {% include 'pages/partials/styles.html' %}
+        {% block extra_styles %}
+        {% endblock extra_styles %}
+      
+        
+        
+        {% if view.page_name == 'home' %}
+            {% include 'pages/components/home_header.html' %}
+        {% else %}
+            {% include 'pages/components/bread_crumb.html' %}
+        {% endif %}
+{% endblock header %}
+<br/><br/>
+<br/>
+
+{% block body %}
+<!-- START SIGNUP SECTION -->
+<div class="login_register_wrap section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-md-10">
+                <div class="login_wrap">
+                    <div class="padding_eight_all bg-white">
+                        <div class="heading_s1">
+                            <h3>Create an Account</h3>
+                        </div>
+                        <form action="{% url 'product:signup' %}" method="post">
+                            {% csrf_token %}
+                            {% for field in form %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+                                {{ field }}
+                            </div>
+                            {% endfor %}
+                            <div class="login_footer form-group">
+                                <div class="chek-form">
+                                    <div class="custome-checkbox">
+                                        <input class="form-check-input" type="checkbox" name="checkbox"
+                                            id="exampleCheckbox2" value="">
+                                        <label class="form-check-label" for="exampleCheckbox2"><span>I agree to terms
+                                                &amp; Policy.</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit">Sign up</button>
+                          </form>
+                        <div class="different_login">
+                            <span> or</span>
+                        </div>
+                        <ul class="btn-login list_none text-center">
+                            <li><a href="#" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a>
+                            </li>
+                            <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
+                        </ul>
+                        <div class="form-note text-center">Already have an account? <a
+                                href="{% url 'product:login' %}">Log in</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END SIGNUP SECTION -->
+
+
+{% endblock body %}
