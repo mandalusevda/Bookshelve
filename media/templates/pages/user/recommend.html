@@ -1,0 +1,9 @@
+
+{% block content %}
+<h1>Recommended Books</h1>
+<ul>
+    {% for recommended in recommended %}
+        <li>{{ recommended.title }} by {{ recommended.user }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

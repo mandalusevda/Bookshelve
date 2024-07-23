@@ -1,0 +1,52 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    {% include 'pages/partials/meta_tags.html' %}
+    <!-- SITE TITLE -->
+    <title>Shopwise - eCommerce Bootstrap 4 HTML Template</title>
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.png' %}">
+
+    <!-- Google Font -->
+
+        {% include 'pages/partials/styles.html' %}
+        {% block extra_styles %}
+        {% endblock extra_styles %}
+
+</head>
+
+<body dir="rtl">
+
+    <!-- LOADER -->
+    <div class="preloader">
+        <div class="lds-ellipsis">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <!-- END LOADER -->
+
+    {% include 'pages/components/popup.html' %}
+
+    {% if view.page_name == 'home' %}
+        {% include 'pages/components/home_header.html' %}
+    {% else %}
+        {% include 'pages/components/pages_header.html' %}
+        {% include 'pages/components/bread_crumb.html' %}
+    {% endif %}
+
+    {% if view.page_name == 'home' %}
+        {% include 'pages/components/home_footer.html' %}
+    {% else %}
+        {% include 'pages/components/pages_footer.html' %}
+    {% endif %}
+
+       
+</body>
+
+</html>

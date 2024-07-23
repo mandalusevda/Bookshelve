@@ -1,0 +1,104 @@
+
+{% load static %}
+{% block header %}
+    {% include 'pages/partials/meta_tags.html' %}
+    {% include 'pages/partials/scripts.html' %}
+    <!-- SITE TITLE -->
+    <title>Products Template</title>
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <!-- Google Font -->
+
+        {% include 'pages/partials/styles.html' %}
+        {% block extra_styles %}
+        {% endblock extra_styles %}
+
+
+
+        {% if view.page_name == 'home' %}
+            {% include 'pages/components/home_header.html' %}
+        {% else %}
+            {% include 'pages/components/pages_header.html' %}
+            {% include 'pages/components/bread_crumb.html' %}
+        {% endif %}
+{% endblock header %}
+<br/><br/>
+<br/>
+
+{% block body %}
+<body style="background-color:lavender">
+    {% if user.is_authenticated %}
+        <div class="divconfig1">
+            {% for product in products %}  
+            <ul id="border">
+            <button id="border" style="background-color:TEAL" >
+            <div class="divconfig2">
+                {% if product.picture %}
+                <img style="height:80px;width:80px"src="{{product.picture.url }}" alt="icon"><br>
+                {% else %}
+                <img style="height:80px;width:80px"src="{% static 'assets/images/product4.png' %}" alt="icon"><br>
+                {%endif%}
+                <h2>{{product.title}}</h2><br>
+                <p>summary:{{product.summary}}</p><br>
+                <p>is_active:{{product.is_active|safe}}</p><br>
+                <p>is_special:{{product.is_special}}</p><br>
+                <p>stock:{{product.stock}}</p><br>
+                <p>rating:{{product.rating.rating}}</p>
+                <p>category:{{product.category}}</p>
+                <p>genre:{{product.genre.title}}</p>
+                <a href="/update/{{ product.id }}"><a class="glyphicon glyphicon-pencil" >Update</a></a>  
+                <a href="/delete/{{ product.id }}">Delete</a>  
+                <a href="/retrieve/{{ product.id }}">Retrieve</a> <br>
+                <a href="{% url 'product:rate_product' product.id %}">Rate</a>
+            </div>
+            </button>
+            </ul>
+            {%endfor%}
+        </div>
+        <br>
+    {%endif%}
+
+    </br>
+    <div class="row">
+        <div class="col-12">
+            {% include 'pages/components/pagination.html' %}
+        </div>
+    </div>
+</body>
+
+    <style>
+       
+        .divconfig1{
+            background-color:white;
+            position: absolute ;
+            right: 0;
+            left: 0;
+            text-align: center;
+        }
+        .divconfig2{
+            padding-right: 30px;
+            padding-left: 50px;
+        
+        }
+        #border{
+            display: inline-block;
+        }
+        
+        </style>
+        
+        
+{% endblock body %} 
+{% block content %}
+<form method="get" action="{% url 'product:page_list' %}">
+    <input type="text" name="search" placeholder="Search for products..." value="{{ request.GET.search }}">
+    <button type="submit">Search</button>
+</form>
+
+{% for product in products %}
+    <div>
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.summary }}</p>
+    </div>
+{% endfor %}
+{% endblock %}
