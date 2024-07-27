@@ -96,6 +96,7 @@ collectstatic/
 packages.cmd
 **/migrations/*
 !**/migrations/__init__.py
+__init__.py
 media/upload/**
 !media/upload/*
 uploads/

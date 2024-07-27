@@ -49,7 +49,6 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS.append('rest_framework')
 INSTALLED_APPS.append('rest_framework_simplejwt')
-INSTALLED_APPS.append('rest_framework_simplejwt.token_blacklist')
 INSTALLED_APPS.append('django_filters')
 INSTALLED_APPS.append('rangefilter')
 INSTALLED_APPS.append('safedelete')
